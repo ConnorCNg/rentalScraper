@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+
+{% block main %}
+
+    <hr class="blueLine"></hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Price</th>
+                <th>Area</th>
+                <th># Beds</th>
+                <th># Baths</th>
+                <th>Address</th>
+                <th>Zillow Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, zpid in zpids.items() %}
+                <tr>
+                    <td>{{zpid.price}}</td>
+                    <td>{{zpid.area}}</td>
+                    <td>{{zpid.beds}}</td>
+                    <td>{{zpid.baths}}</td>
+                    <td>{{zpid.address}}</td>
+                    <td><a href='{{zpid.detailUrl}}'>{{zpid.detailUrl}}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% for property in price_history %}
+        <p href=>{{property.zpid}}</p>
+        <a href="{{property.detailUrl}}">{{property.detailUrl}}</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Event</th>
+                    <th>Price</th>
+                    <th>Price Change Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for history in property.priceHistory %}
+                    <tr>
+                        <td>{{history.date}}</td>
+                        <td>{{history.event}}</td>
+                        <td>{{history.price}}</td>
+                        <td>{{history.priceChangeRate}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
